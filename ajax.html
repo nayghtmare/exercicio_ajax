@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Github</title>
+<link rel="stylesheet" href="main.css">
+</head>
+<body>
+<header>
+<div class="container">
+<img class="profile-avatar" src="/images/profile.jpeg" id="avatar" alt="."> 
+<h1 class="profile-name" id="name">Nayara Stelmach</h1>
+<h2 class="profile-username" id="username">@nayghtmare</h2>
+<ul class="numbers">
+<li class="numbers-item">
+<h4>Repositórios</h4>
+<span id="repos"></span>
+</li>
+<li class="numbers-item">
+<h4>Seguidores</h4>
+<span id="followers"></span>
+</li>
+<li class="numbers-item">
+<h4>Seguindo</h4>
+<span id="following"></span>
+</li>
+</ul>
+<a href="https://github.com/nayghtmare" id="link" class="profile-link">Ver Perfil no GitHub</a>
+</div>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const name = document.querySelector('#name');
+    const userName = document.querySelector('#username');
+    const publicRepos = document.querySelector('#repos');
+    const followers = document.querySelector('#followers');
+    const following = document.querySelector('#following');
+    const userLink = document.querySelector('#link');
+
+    fetch('https://api.github.com/users/nayghtmare')
+        .then(response => response.json())
+        .then(json => {
+            name.innerText = json.name;
+            userName.innerText = json.login;
+            publicRepos.innerText = json.public_repos;
+            followers.innerText = json.followers;
+            following.innerText = json.following;
+            userLink.href = json.html_url;
+        })
+});
+</script>
+</body>
+</html>
